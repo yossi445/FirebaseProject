@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView tvUser;
 
     FirebaseUser currentUser;
+    FirebaseAuth mAuth;
 
 
 
@@ -38,8 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSignUp.setOnClickListener(this);
         btnLogIn.setOnClickListener(this);
 
-        currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
+        mAuth = FirebaseAuth.getInstance();
 
     }
 
@@ -49,22 +49,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStart() {
         super.onStart();
 
-       if(currentUser != null)
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(currentUser != null)
        {
-           tvUser.setText(currentUser.getEmail().toString());
            btnSignUp.setText("התנתקות");
+           tvUser.setText(currentUser.getEmail().toString());
+           btnLogIn.setVisibility(View.INVISIBLE);
        }
 
     }
 
+
+
     @Override
     public void onClick(View v) {
 
-        if(v == btnSignUp)
-        {
-            Intent intent = new Intent(this,SignUpActivity.class);
-            startActivity(intent);
-        }
+        if(v == btnSignUp) {
+            if (btnSignUp.getText().equals("הרשמה")) {
+                Intent intent = new Intent(this, SignUpActivity.class);
+                startActivity(intent);
+
+
+            }
+            else if (btnSignUp.getText().equals("התנתקות")) {
+
+                mAuth.signOut();
+                btnSignUp.setText("הרשמה");
+                tvUser.setText("שלום אורח!");
+                btnLogIn.setVisibility(View.VISIBLE);
+            }
+
+            }
 
     }
 }
