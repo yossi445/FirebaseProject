@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
-    Button btnSignUp, btnLogIn, btnAdd;
+    Button btnSignUp, btnLogIn, btnAdd, btnAll;
     TextView tvUser;
 
     FirebaseUser currentUser;
@@ -43,10 +43,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnLogIn = findViewById(R.id.btnLogIn);
         btnAdd = findViewById(R.id.btnAdd);
         tvUser = findViewById(R.id.tvUser);
+        btnAll = findViewById(R.id.btnAll);
 
         btnSignUp.setOnClickListener(this);
         btnLogIn.setOnClickListener(this);
         btnAdd.setOnClickListener(this);
+        btnAll.setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -89,20 +91,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             }
-            else if(v == btnLogIn)
-                {
+            else if(v == btnLogIn){
 
-                    d = new Dialog(this);
-                    d.setContentView(R.layout.signin_dialog);
-                    d.setCancelable(true);
 
-                    etEmail = d.findViewById(R.id.etEmail);
-                    etPass = d.findViewById(R.id.etPass);
-                    btnSign= d.findViewById(R.id.btnSign);
-                    btnSign.setOnClickListener(this);
-                    d.show();
-                }
-                else if(v == btnSign){
+
+                d = new Dialog(this);
+                d.setContentView(R.layout.signin_dialog);
+                d.setCancelable(true);
+
+                etEmail = d.findViewById(R.id.etEmail);
+                etPass = d.findViewById(R.id.etPass);
+                btnSign= d.findViewById(R.id.btnSign);
+                btnSign.setOnClickListener(this);
+                d.show();
+
+            }
+            else if(v == btnSign){
 
                     String mail,pass;
                     mail = etEmail.getText().toString();
@@ -112,13 +116,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         {
                             signIn(mail,pass);
                         }
-
-                 }
-                 else if(v == btnAdd) {
+            }
+            else if(v == btnAdd) {
                     Intent intent = new Intent(this,AddQuestionActivity.class);
                     startActivity(intent);
 
-        }
+            }
+            else if(v == btnAll)
+            {
+                Intent intent = new Intent(this, AllQuestionsActivity.class);
+                startActivity(intent);
+            }
 
     }
 
