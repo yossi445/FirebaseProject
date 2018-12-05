@@ -48,6 +48,19 @@
 
         />
 
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="הוספת שאלה"
+        android:layout_gravity="center"
+        android:background="#acd4c0"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+
+
+        />
+
 
 
 </LinearLayout>

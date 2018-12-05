@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
-    Button btnSignUp, btnLogIn;
+    Button btnSignUp, btnLogIn, btnAdd;
     TextView tvUser;
 
     FirebaseUser currentUser;
@@ -41,10 +41,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnSignUp = findViewById(R.id.btnSignUp);
         btnLogIn = findViewById(R.id.btnLogIn);
+        btnAdd = findViewById(R.id.btnAdd);
         tvUser = findViewById(R.id.tvUser);
 
         btnSignUp.setOnClickListener(this);
         btnLogIn.setOnClickListener(this);
+        btnAdd.setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -111,8 +113,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             signIn(mail,pass);
                         }
 
-
                  }
+                 else if(v == btnAdd) {
+                    Intent intent = new Intent(this,AddQuestionActivity.class);
+                    startActivity(intent);
+
+        }
 
     }
 
