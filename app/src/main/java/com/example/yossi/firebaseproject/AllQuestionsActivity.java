@@ -1,9 +1,13 @@
 package com.example.yossi.firebaseproject;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -12,7 +16,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class AllQuestionsActivity extends AppCompatActivity {
+public class AllQuestionsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     ListView lv;
     ArrayList<Question> questionsList;
@@ -29,6 +33,7 @@ public class AllQuestionsActivity extends AppCompatActivity {
 
 
         lv = findViewById(R.id.lv);
+        lv.setOnItemClickListener(this);
 
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("questions");
@@ -53,13 +58,14 @@ public class AllQuestionsActivity extends AppCompatActivity {
                 {
 
                     Question q = data.getValue(Question.class);
-                    questionsList.add(q);
+
+                    //if(q.userId.equals(FirebaseAuth.getInstance().getUid().toString()))
+                            questionsList.add(q);
 
                 }
 
                 allQuestionsAdapter = new AllQuestionsAdapter(AllQuestionsActivity.this,0,0,questionsList);
                 lv.setAdapter(allQuestionsAdapter);
-
 
             }
 
@@ -68,6 +74,21 @@ public class AllQuestionsActivity extends AppCompatActivity {
                 // Failed to read value
             }
         });
+
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        Question q = questionsList.get(position);
+        Intent intent = new Intent(this,QuestionAndAnswersActivity.class);
+        intent.putExtra("title",q.title);
+        intent.putExtra("body",q.body);
+        intent.putExtra("qid",q.questionId);
+
+        startActivity(intent);
+
 
 
     }

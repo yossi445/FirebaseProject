@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".QuestionAndAnswersActivity"
+    android:orientation="vertical"
+    >
+
+
+
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="כותרת"
+        android:textSize="30sp"
+        android:textColor="#0f08ca"
+        android:background="#c3ccd6"
+        />
+
+    <TextView
+        android:id="@+id/tvBody"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="פירוט"
+        android:textSize="20sp"
+        android:textColor="#0f08ca"
+        android:background="#c3ccd6"
+        />
+
+    <TextView
+        android:text="תשובות"
+        android:textSize="35sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#be093f"
+        />
+
+
+    <EditText
+        android:id="@+id/etAns"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="הזן תשובה"
+        />
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="הוסף תשובה"
+        android:layout_gravity="center"
+        />
+
+
+    <ListView
+        android:id="@+id/lvAnswers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+    </ListView>
+
+</LinearLayout>

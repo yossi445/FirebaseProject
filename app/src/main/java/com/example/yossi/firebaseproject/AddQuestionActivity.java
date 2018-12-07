@@ -42,7 +42,7 @@ public class AddQuestionActivity extends AppCompatActivity implements View.OnCli
         Question q = new Question("",etTitle.getText().toString(),etBody.getText().toString(),uid);
 
         DatabaseReference questionRef = database.getReference("questions").push();
-        q.QuestionId = questionRef.getKey();
+        q.questionId = questionRef.getKey();
         questionRef.setValue(q);
         finish();
 
