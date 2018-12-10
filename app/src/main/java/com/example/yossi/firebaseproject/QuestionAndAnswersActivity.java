@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -19,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class QuestionAndAnswersActivity extends AppCompatActivity implements View.OnClickListener {
+public class QuestionAndAnswersActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     TextView tvTitle, tvBody;
     EditText etAns;
@@ -47,6 +48,7 @@ public class QuestionAndAnswersActivity extends AppCompatActivity implements Vie
         etAns = findViewById(R.id.etAns);
 
         lvAnswers = findViewById(R.id.lvAnswers);
+        lvAnswers.setOnItemClickListener(this);
 
         Intent intent = getIntent();
         String title = intent.getExtras().getString("title");
@@ -123,4 +125,19 @@ public class QuestionAndAnswersActivity extends AppCompatActivity implements Vie
     }
 
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+        Answer answer = answersList.get(position);
+        Intent intent = new Intent(this,WatchAnswerActivity.class);
+
+       intent.putExtra("answerId",answer.answerId);
+        intent.putExtra("questionId",answer.questionId);
+
+        startActivity(intent);
+
+
+
+    }
 }

@@ -19,7 +19,8 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".AddQuestionActivity" />
         <activity android:name=".AllQuestionsActivity" />
-        <activity android:name=".QuestionAndAnswersActivity"></activity>
+        <activity android:name=".QuestionAndAnswersActivity" />
+        <activity android:name=".WatchAnswerActivity"></activity>
     </application>
 
 </manifest>

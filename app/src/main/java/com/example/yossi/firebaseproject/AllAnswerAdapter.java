@@ -8,11 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
-public class AllAnswerAdapter extends ArrayAdapter<Answer> {
+public class AllAnswerAdapter extends ArrayAdapter<Answer>  {
 
     Context context;
     List<Answer> answersList;
@@ -35,9 +39,8 @@ public class AllAnswerAdapter extends ArrayAdapter<Answer> {
         TextView tvContent = view.findViewById(R.id.tvContent);
         TextView tvLikes = view.findViewById(R.id.tvLikes);
 
+        final Answer a = answersList.get(position);
 
-
-        Answer a = answersList.get(position);
 
         tvContent.setText(a.content);
         tvLikes.setText(a.likes + " אהבו את התשובה");
@@ -46,5 +49,8 @@ public class AllAnswerAdapter extends ArrayAdapter<Answer> {
         return view;
 
     }
+
+
+
 }
 
