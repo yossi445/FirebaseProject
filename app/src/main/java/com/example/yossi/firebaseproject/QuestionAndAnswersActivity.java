@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class QuestionAndAnswersActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class QuestionAndAnswersActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     TextView tvTitle, tvBody;
     EditText etAns;
@@ -49,6 +49,7 @@ public class QuestionAndAnswersActivity extends AppCompatActivity implements Vie
 
         lvAnswers = findViewById(R.id.lvAnswers);
         lvAnswers.setOnItemClickListener(this);
+        lvAnswers.setOnItemLongClickListener(this);
 
         Intent intent = getIntent();
         String title = intent.getExtras().getString("title");
@@ -138,6 +139,28 @@ public class QuestionAndAnswersActivity extends AppCompatActivity implements Vie
         startActivity(intent);
 
 
+
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+
+        Answer answer = answersList.get(position);
+
+        if(answer.userId.equals(FirebaseAuth.getInstance().getUid().toString())) {
+            Intent intent = new Intent(this, EditAnswerActivity.class);
+
+            intent.putExtra("answerId", answer.answerId);
+            intent.putExtra("questionId", answer.questionId);
+
+            startActivity(intent);
+        }
+        else
+            Toast.makeText(this, "ביכולתך לערוך רק תשובה שאתה כתבת", Toast.LENGTH_SHORT).show();
+
+        return true;
 
     }
 }

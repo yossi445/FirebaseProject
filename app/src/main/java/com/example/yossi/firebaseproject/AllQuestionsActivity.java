@@ -16,7 +16,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class AllQuestionsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class AllQuestionsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     ListView lv;
     ArrayList<Question> questionsList;
@@ -34,6 +34,7 @@ public class AllQuestionsActivity extends AppCompatActivity implements AdapterVi
 
         lv = findViewById(R.id.lv);
         lv.setOnItemClickListener(this);
+        lv.setOnItemLongClickListener(this);
 
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("questions");
@@ -66,7 +67,6 @@ public class AllQuestionsActivity extends AppCompatActivity implements AdapterVi
 
                 allQuestionsAdapter = new AllQuestionsAdapter(AllQuestionsActivity.this,0,0,questionsList);
                 lv.setAdapter(allQuestionsAdapter);
-
             }
 
             @Override
@@ -83,6 +83,7 @@ public class AllQuestionsActivity extends AppCompatActivity implements AdapterVi
 
         Question q = questionsList.get(position);
         Intent intent = new Intent(this,QuestionAndAnswersActivity.class);
+
         intent.putExtra("title",q.title);
         intent.putExtra("body",q.body);
         intent.putExtra("qid",q.questionId);
@@ -90,6 +91,21 @@ public class AllQuestionsActivity extends AppCompatActivity implements AdapterVi
         startActivity(intent);
 
 
+    }
 
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+        Question q = questionsList.get(position);
+
+        DatabaseReference quesRef = FirebaseDatabase.getInstance().getReference("questions").child(q.questionId);
+        DatabaseReference answersRef = FirebaseDatabase.getInstance().getReference("answers").child(q.questionId);
+
+        quesRef.removeValue();
+        answersRef.removeValue();
+
+
+
+        return true;
     }
 }
