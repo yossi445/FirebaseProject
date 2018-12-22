@@ -13,6 +13,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -54,19 +56,24 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                 Toast.makeText(SignUpActivity.this, "נרשמת בהצלחה",
                                         Toast.LENGTH_SHORT).show();
                                 finish();
+                                createMember();
 
                             } else {
                                 Toast.makeText(SignUpActivity.this, "ההרשמה נכשלה",
                                         Toast.LENGTH_SHORT).show();
                             }
-
                             // ...
                         }
                     });
         }
+    }
 
-
-
+    public void createMember()
+    {
+        String uid = FirebaseAuth.getInstance().getUid().toString();
+        Member m = new Member(uid);
+        DatabaseReference membersRef = FirebaseDatabase.getInstance().getReference("members").child(uid);
+        membersRef.setValue(m);
 
     }
 }

@@ -48,7 +48,5 @@ public class AddQuestionActivity extends AppCompatActivity implements View.OnCli
 
 
 
-
-
     }
 }
