@@ -46,19 +46,22 @@ public class AddQuestionActivity extends AppCompatActivity implements View.OnCli
         String uid = FirebaseAuth.getInstance().getUid().toString();
         Question q = new Question("",etTitle.getText().toString(),etBody.getText().toString(),uid);
 
-        DatabaseReference questionRef = database.getReference("questions").push();
+        final DatabaseReference questionRef = database.getReference("questions").push();
         q.questionId = questionRef.getKey();
         questionRef.setValue(q);
-        //------------------------------
+
+        //----------------------------
 
         final DatabaseReference memberRef = database.getReference("members").child(uid);
+
         memberRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                m = dataSnapshot.getValue(Member.class);
-                m.questionsCounter++;
-                memberRef.setValue(m);
+
+                 m = dataSnapshot.getValue(Member.class);
+                 m.questionsCounter++;
+                 memberRef.setValue(m);
 
             }
 
@@ -68,9 +71,9 @@ public class AddQuestionActivity extends AppCompatActivity implements View.OnCli
             }
         });
 
+
+
         finish();
-
-
 
     }
 }
