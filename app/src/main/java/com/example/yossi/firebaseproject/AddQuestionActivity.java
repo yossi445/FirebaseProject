@@ -7,8 +7,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class AddQuestionActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -16,6 +19,8 @@ public class AddQuestionActivity extends AppCompatActivity implements View.OnCli
     Button btnAdd;
 
     FirebaseDatabase database;
+    Member m;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,25 @@ public class AddQuestionActivity extends AppCompatActivity implements View.OnCli
         DatabaseReference questionRef = database.getReference("questions").push();
         q.questionId = questionRef.getKey();
         questionRef.setValue(q);
+        //------------------------------
+
+        final DatabaseReference memberRef = database.getReference("members").child(uid);
+        memberRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                m = dataSnapshot.getValue(Member.class);
+                m.questionsCounter++;
+                memberRef.setValue(m);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+            }
+        });
+
         finish();
 
 

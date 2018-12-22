@@ -55,8 +55,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 Toast.makeText(SignUpActivity.this, "נרשמת בהצלחה",
                                         Toast.LENGTH_SHORT).show();
-                                finish();
                                 createMember();
+                                finish();
 
                             } else {
                                 Toast.makeText(SignUpActivity.this, "ההרשמה נכשלה",
@@ -64,16 +64,22 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             }
                             // ...
                         }
+
+
                     });
         }
     }
 
-    public void createMember()
-    {
+    private void createMember() {
+
         String uid = FirebaseAuth.getInstance().getUid().toString();
         Member m = new Member(uid);
-        DatabaseReference membersRef = FirebaseDatabase.getInstance().getReference("members").child(uid);
-        membersRef.setValue(m);
+        DatabaseReference memberRef = FirebaseDatabase.getInstance().getReference("members").child(uid);
+        memberRef.setValue(m);
+
 
     }
+
+
 }
+

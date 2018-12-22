@@ -6,11 +6,14 @@ public class Member {
     int questionsCounter = 0;
     int answersCounter = 0;
 
+    public Member()
+    {
 
-    public Member() {
     }
 
     public Member(String memberId) {
         this.memberId = memberId;
     }
+
+
 }
