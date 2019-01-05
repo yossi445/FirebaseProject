@@ -5,6 +5,7 @@ public class Member {
     String memberId;
     int questionsCounter = 0;
     int answersCounter = 0;
+    String profileImageUrl = "";
 
     public Member()
     {
@@ -15,5 +16,11 @@ public class Member {
         this.memberId = memberId;
     }
 
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
 
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
+    }
 }

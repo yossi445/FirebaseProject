@@ -36,8 +36,6 @@ public class AddQuestionActivity extends AppCompatActivity implements View.OnCli
 
         database = FirebaseDatabase.getInstance();
 
-
-
     }
 
     @Override
@@ -58,19 +56,17 @@ public class AddQuestionActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-
                  m = dataSnapshot.getValue(Member.class);
                  m.questionsCounter++;
                  memberRef.setValue(m);
-
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
+
             }
         });
-
 
 
         finish();

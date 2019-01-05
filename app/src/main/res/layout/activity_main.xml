@@ -9,6 +9,23 @@
     android:layout_gravity="center"
     >
 
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_launcher_background"
+        />
+
+    <TextView
+        android:id="@+id/tvUpdateProfilePic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="עדכן תמונת פרופיל"
+        android:layout_gravity="center"
+
+        />
     <TextView
         android:id="@+id/tvUser"
         android:layout_width="wrap_content"

@@ -83,7 +83,6 @@ public class QuestionAndAnswersActivity extends AppCompatActivity implements Vie
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
 
                     Answer a = data.getValue(Answer.class);
-
                     answersList.add(a);
 
                 }
