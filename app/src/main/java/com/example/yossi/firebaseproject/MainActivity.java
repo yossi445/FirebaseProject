@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     StorageReference mStorageRef;
     DatabaseReference membersRef;
-     DatabaseReference mRef;
+    DatabaseReference mRef;
     ProgressDialog progressDialog;
 
     Uri imageUri;
