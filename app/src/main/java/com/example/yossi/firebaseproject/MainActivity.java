@@ -105,9 +105,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
            btnSignUp.setText("התנתקות");
            tvUser.setText(currentUser.getEmail().toString());
            btnLogIn.setVisibility(View.INVISIBLE);
+           retriveData();
        }
 
+
     }
+
+
+    private void retriveData() {
+
+        membersRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                Member member = dataSnapshot.child(currentUser.getUid()).getValue(Member.class);
+                String url = member.profileImageUrl;
+                if(!url.equals(""))
+                    Picasso.get().load(url).into(iv);
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 
 
     @Override
@@ -126,6 +152,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 btnSignUp.setText("הרשמה");
                 tvUser.setText("שלום אורח!");
                 btnLogIn.setVisibility(View.VISIBLE);
+                iv.setImageResource(R.drawable.ic_launcher_background);
+
             }
 
             }
